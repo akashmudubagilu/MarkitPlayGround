@@ -18,6 +18,12 @@
 		994832771794B721005E9314 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994832761794B721005E9314 /* Default-568h@2x.png */; };
 		994832801794BA3D005E9314 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948327E1794BA3D005E9314 /* ViewController.m */; };
 		994832811794BA3D005E9314 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9948327F1794BA3D005E9314 /* ViewController.xib */; };
+		994832841794BCB4005E9314 /* LookUpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 994832831794BCB4005E9314 /* LookUpRequest.m */; };
+		994832871794C64E005E9314 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 994832861794C64E005E9314 /* Company.m */; };
+		9948329017954180005E9314 /* QuoteRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948328F17954180005E9314 /* QuoteRequest.m */; };
+		9948329517954318005E9314 /* Quote.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948329417954318005E9314 /* Quote.m */; };
+		9948329917954B90005E9314 /* QuoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9948329717954B90005E9314 /* QuoteViewController.m */; };
+		9948329A17954B90005E9314 /* QuoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9948329817954B90005E9314 /* QuoteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +43,17 @@
 		9948327D1794BA3D005E9314 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9948327E1794BA3D005E9314 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9948327F1794BA3D005E9314 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		994832821794BCB3005E9314 /* LookUpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LookUpRequest.h; path = MarkitPlayGround/LookUpRequest.h; sourceTree = "<group>"; };
+		994832831794BCB4005E9314 /* LookUpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LookUpRequest.m; path = MarkitPlayGround/LookUpRequest.m; sourceTree = "<group>"; };
+		994832851794C64E005E9314 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Company.h; path = MarkitPlayGround/Company.h; sourceTree = "<group>"; };
+		994832861794C64E005E9314 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Company.m; path = MarkitPlayGround/Company.m; sourceTree = "<group>"; };
+		9948328E17954180005E9314 /* QuoteRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuoteRequest.h; path = MarkitPlayGround/QuoteRequest.h; sourceTree = "<group>"; };
+		9948328F17954180005E9314 /* QuoteRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuoteRequest.m; path = MarkitPlayGround/QuoteRequest.m; sourceTree = "<group>"; };
+		9948329317954318005E9314 /* Quote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quote.h; path = MarkitPlayGround/Quote.h; sourceTree = "<group>"; };
+		9948329417954318005E9314 /* Quote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Quote.m; path = MarkitPlayGround/Quote.m; sourceTree = "<group>"; };
+		9948329617954B90005E9314 /* QuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteViewController.h; sourceTree = "<group>"; };
+		9948329717954B90005E9314 /* QuoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteViewController.m; sourceTree = "<group>"; };
+		9948329817954B90005E9314 /* QuoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuoteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +100,11 @@
 		994832661794B721005E9314 /* MarkitPlayGround */ = {
 			isa = PBXGroup;
 			children = (
+				9948329B17954BA4005E9314 /* ViewController */,
+				99483292179542CD005E9314 /* Model */,
+				9948329117954191005E9314 /* Requests */,
 				9948326F1794B721005E9314 /* AppDelegate.h */,
 				994832701794B721005E9314 /* AppDelegate.m */,
-				9948327D1794BA3D005E9314 /* ViewController.h */,
-				9948327E1794BA3D005E9314 /* ViewController.m */,
-				9948327F1794BA3D005E9314 /* ViewController.xib */,
 				994832671794B721005E9314 /* Supporting Files */,
 			);
 			path = MarkitPlayGround;
@@ -105,6 +122,43 @@
 				994832761794B721005E9314 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9948329117954191005E9314 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				994832821794BCB3005E9314 /* LookUpRequest.h */,
+				994832831794BCB4005E9314 /* LookUpRequest.m */,
+				9948328E17954180005E9314 /* QuoteRequest.h */,
+				9948328F17954180005E9314 /* QuoteRequest.m */,
+			);
+			name = Requests;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		99483292179542CD005E9314 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				994832851794C64E005E9314 /* Company.h */,
+				994832861794C64E005E9314 /* Company.m */,
+				9948329317954318005E9314 /* Quote.h */,
+				9948329417954318005E9314 /* Quote.m */,
+			);
+			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		9948329B17954BA4005E9314 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9948329617954B90005E9314 /* QuoteViewController.h */,
+				9948329717954B90005E9314 /* QuoteViewController.m */,
+				9948329817954B90005E9314 /* QuoteViewController.xib */,
+				9948327D1794BA3D005E9314 /* ViewController.h */,
+				9948327E1794BA3D005E9314 /* ViewController.m */,
+				9948327F1794BA3D005E9314 /* ViewController.xib */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +217,7 @@
 				994832751794B721005E9314 /* Default@2x.png in Resources */,
 				994832771794B721005E9314 /* Default-568h@2x.png in Resources */,
 				994832811794BA3D005E9314 /* ViewController.xib in Resources */,
+				9948329A17954B90005E9314 /* QuoteViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +231,11 @@
 				9948326D1794B721005E9314 /* main.m in Sources */,
 				994832711794B721005E9314 /* AppDelegate.m in Sources */,
 				994832801794BA3D005E9314 /* ViewController.m in Sources */,
+				994832841794BCB4005E9314 /* LookUpRequest.m in Sources */,
+				994832871794C64E005E9314 /* Company.m in Sources */,
+				9948329017954180005E9314 /* QuoteRequest.m in Sources */,
+				9948329517954318005E9314 /* Quote.m in Sources */,
+				9948329917954B90005E9314 /* QuoteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

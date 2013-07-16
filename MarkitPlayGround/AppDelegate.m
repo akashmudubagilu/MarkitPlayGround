@@ -21,8 +21,8 @@
      
     
     self.window.backgroundColor = [UIColor whiteColor];
-    [self.window addSubview:navController.view];
     [self.window makeKeyAndVisible];
+    [self.window setRootViewController:navController];
     return YES;
 }
 

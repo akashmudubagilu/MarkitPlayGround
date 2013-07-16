@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
+ 
+@property (weak, nonatomic) IBOutlet UITableView *CompanyDetailsTable;
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchField;
+
+@property(strong, nonatomic) NSMutableArray *companyArray;
 @end
