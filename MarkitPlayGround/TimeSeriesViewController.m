@@ -7,6 +7,7 @@
 //
 
 #import "TimeSeriesViewController.h"
+#import "SVProgressHUD.h"
 
 @interface TimeSeriesViewController ()
 
@@ -39,7 +40,10 @@
 
 
 -(void)makeCallToGetTimeSeriesWithCompany:(Company *)c{
+    
     TimeSeriesRequest *request = [[TimeSeriesRequest alloc]initWithCompany:c];
+    [SVProgressHUD showWithStatus:@"Loading"];
+
     
     [request makeTimeSeriesRequestSuccess:^(TimeSeries *timeSeries) {
         
@@ -47,7 +51,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
            // [self createPlot];
             self.timeSeries  = timeSeries;
-            
+            [SVProgressHUD dismiss];
             [self reloadData];
             [graph reloadData];
 
@@ -57,6 +61,8 @@
     } failure:^(NSString *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Alert" message: error delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
             

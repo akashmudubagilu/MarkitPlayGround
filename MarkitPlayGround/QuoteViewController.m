@@ -8,6 +8,7 @@
 
 #import "QuoteViewController.h"
 #import "TimeSeriesViewController.h"
+#import "SVProgressHUD.h"
 
 @interface QuoteViewController ()
 
@@ -80,16 +81,21 @@
 
 -(void)makeCallToGetQuoteWithCompany:(Company *)c{
     QuoteRequest *request = [[QuoteRequest alloc]initWithCompany:c];
+    [SVProgressHUD showWithStatus:@"Loading"];
 
     [request makeCallToQuoteRequestSuccess:^(Quote *quote) {
         self.quote = quote;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self fillUI];
+            [SVProgressHUD dismiss];
+
         });
         
     } Failure:^(NSString *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Alert" message: error delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
 

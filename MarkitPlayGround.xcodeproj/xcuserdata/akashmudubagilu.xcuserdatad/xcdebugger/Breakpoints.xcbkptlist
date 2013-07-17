@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MarkitPlayGround/TimeSeriesViewController.m"
-         timestampString = "395736591.239139"
+         timestampString = "395740219.90219"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "156"
-         endingLineNumber = "156"
-         landmarkName = "-reloadData"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
+         landmarkName = "-makeCallToGetTimeSeriesWithCompany:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

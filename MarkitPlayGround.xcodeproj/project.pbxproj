@@ -31,6 +31,8 @@
 		994834B61795E158005E9314 /* TimeSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 994834B51795E158005E9314 /* TimeSeries.m */; };
 		994834BA1795FCB6005E9314 /* TimeSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994834B81795FCB6005E9314 /* TimeSeriesViewController.m */; };
 		994834BB1795FCB6005E9314 /* TimeSeriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 994834B91795FCB6005E9314 /* TimeSeriesViewController.xib */; };
+		994834C31796826D005E9314 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 994834C01796826D005E9314 /* SVProgressHUD.bundle */; };
+		994834C41796826D005E9314 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 994834C21796826D005E9314 /* SVProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +151,9 @@
 		994834B71795FCB6005E9314 /* TimeSeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSeriesViewController.h; sourceTree = "<group>"; };
 		994834B81795FCB6005E9314 /* TimeSeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSeriesViewController.m; sourceTree = "<group>"; };
 		994834B91795FCB6005E9314 /* TimeSeriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeSeriesViewController.xib; sourceTree = "<group>"; };
+		994834C01796826D005E9314 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		994834C11796826D005E9314 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		994834C21796826D005E9314 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +192,7 @@
 		9948325F1794B721005E9314 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				994834BF1796826C005E9314 /* SVProgressHUD */,
 				994834A51795DB74005E9314 /* QuartzCore.framework */,
 				994834551795DAED005E9314 /* CorePlotHeaders */,
 				994834A31795DAEE005E9314 /* libCorePlot-CocoaTouch.a */,
@@ -354,6 +360,16 @@
 			path = CorePlotHeaders;
 			sourceTree = "<group>";
 		};
+		994834BF1796826C005E9314 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				994834C01796826D005E9314 /* SVProgressHUD.bundle */,
+				994834C11796826D005E9314 /* SVProgressHUD.h */,
+				994834C21796826D005E9314 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -412,6 +428,7 @@
 				994832811794BA3D005E9314 /* ViewController.xib in Resources */,
 				9948329A17954B90005E9314 /* QuoteViewController.xib in Resources */,
 				994834BB1795FCB6005E9314 /* TimeSeriesViewController.xib in Resources */,
+				994834C31796826D005E9314 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +451,7 @@
 				994834B31795E130005E9314 /* Series.m in Sources */,
 				994834B61795E158005E9314 /* TimeSeries.m in Sources */,
 				994834BA1795FCB6005E9314 /* TimeSeriesViewController.m in Sources */,
+				994834C41796826D005E9314 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

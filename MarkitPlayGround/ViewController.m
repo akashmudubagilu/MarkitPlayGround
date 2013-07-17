@@ -10,6 +10,7 @@
 #import "LookUpRequest.h"
 #import "Company.h"
 #import "QuoteViewController.h"
+#import "SVProgressHUD.h"
 
 
 #define tableViewCellReuseIdentifier @"companyTableCell"
@@ -61,19 +62,24 @@
     
     if(self.searchField.text.length > 0 ){
         LookUpRequest *request = [[LookUpRequest alloc]initWithSearchString:self.searchField.text];
-        
+        [SVProgressHUD showWithStatus:@"Loading"];
+
         [request makeCallToLookupRequestSuccess:^(NSMutableArray *array) {
             NSLog(@"%d", [array count]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.companyArray  = array;
 
                [self.CompanyDetailsTable reloadData];
+                [SVProgressHUD dismiss];
+
                 [self.searchField resignFirstResponder];
             });
 
             
         } Failure:^(NSString *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [SVProgressHUD dismiss];
 
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Alert" message: error delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
