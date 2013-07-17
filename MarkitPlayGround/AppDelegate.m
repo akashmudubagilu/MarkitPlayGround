@@ -18,7 +18,7 @@
     
     UIViewController   *rootViewController = [[ViewController alloc]initWithNibName:@"ViewController" bundle:nil];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-     
+    navController.navigationBar.tintColor = [UIColor blackColor];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

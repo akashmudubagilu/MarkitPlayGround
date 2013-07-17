@@ -7,6 +7,7 @@
 //
 
 #import "QuoteViewController.h"
+#import "TimeSeriesViewController.h"
 
 @interface QuoteViewController ()
 
@@ -28,7 +29,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = NO;
-}
+    
+    UIBarButtonItem *plotButton = [[UIBarButtonItem alloc] initWithTitle:@"Plot" style:UIBarButtonItemStylePlain target:self action:@selector(showPlot:)];
+    self.navigationItem.rightBarButtonItem = plotButton;
+ }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [UIView beginAnimations:@"animation" context:nil];
@@ -37,6 +41,23 @@
     [UIView commitAnimations];
 
 }
+
+
+-(void)showPlot:(id)sender{
+    TimeSeriesViewController *vc = [[TimeSeriesViewController alloc]initWithNibName:@"TimeSeriesViewController" bundle:nil];
+    
+    
+    [vc makeCallToGetTimeSeriesWithCompany:self.quote.company ];
+    
+     
+  //  [self presentViewController:vc animated:YES completion:^{
+        
+    //}];
+    vc.title = self.quote.company.name;
+
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 -(void)fillUI{
     if (self.quote) {
@@ -69,7 +90,7 @@
     } Failure:^(NSString *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Alert" message: @"Could not get quote" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Alert" message: error delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
 
         });

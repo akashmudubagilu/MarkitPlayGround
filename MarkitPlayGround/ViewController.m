@@ -175,7 +175,7 @@
     
     [vc makeCallToGetQuoteWithCompany:[self.companyArray objectAtIndex:indexPath.row]];
     
-    vc.title = [(Company *)[self.companyArray objectAtIndex:indexPath.row] name];
+    vc.title = [(Company *)[self.companyArray objectAtIndex:indexPath.row] symbol];
 
     [self.navigationController pushViewController:vc animated:YES];
     
