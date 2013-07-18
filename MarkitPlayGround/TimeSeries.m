@@ -17,7 +17,7 @@
 #define seriesLabelsKey @"SeriesLabels"
 #define xKey @"x"
 #define textKey @"text"
-#define seriesLabelCoordinatesKey @"SeriesLabelCoordinates"
+#define seriesLabelCoordinatesKey @"pos"
 #define seriesDurationKey @"SeriesDuration"
 #define seriesDatesKey @"SeriesDates"
 
@@ -55,11 +55,12 @@
                 if ([x objectForKey:textKey]) {
                     self.seriesLabels = [x objectForKey:textKey];
                 }
+                if ([x objectForKey:seriesLabelCoordinatesKey]) {
+                    self.seriesLabelCoordinates = [x objectForKey:seriesLabelCoordinatesKey];
+                }
             }
         }
-        if ([dict objectForKey:seriesLabelCoordinatesKey]) {
-            self.seriesLabelCoordinates = [dict objectForKey:seriesLabelCoordinatesKey];
-        }
+        
         if ([dict objectForKey:seriesDurationKey]) {
             self.seriesDuration = [dict objectForKey:seriesDurationKey];
         }
