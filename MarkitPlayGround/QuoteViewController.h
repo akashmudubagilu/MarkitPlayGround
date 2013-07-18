@@ -14,19 +14,9 @@
 
 
 @property(nonatomic, strong)Quote *quote;
+@property(nonatomic, strong)UIRefreshControl *refreshControl;
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *symbolLabel;
-@property (weak, nonatomic) IBOutlet UILabel *openLabel;
-@property (weak, nonatomic) IBOutlet UILabel *highLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lowLabel;
-@property (weak, nonatomic) IBOutlet UILabel *changeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *changePercentageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *changeYTDLabel;
-@property (weak, nonatomic) IBOutlet UILabel *changeYTDPercentageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lastPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *marketCapLabel;
-@property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
+@property (weak, nonatomic) IBOutlet UITableView *detailsTableView;
 
 -(void)makeCallToGetQuoteWithCompany:(Company *)c;
 @end
