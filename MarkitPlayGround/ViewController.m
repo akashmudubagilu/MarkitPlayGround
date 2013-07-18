@@ -38,9 +38,9 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    //self.title = @"Search";
-    self.navigationController.navigationBarHidden = YES;
+     self.navigationController.navigationBarHidden = YES;
     self.companyArray = [NSMutableArray array];
+    [self.searchField becomeFirstResponder];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -55,7 +55,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark  -
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
 
@@ -97,7 +97,7 @@
     }
     
 }
-#pragma tableView datasource
+#pragma mark tableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSLog(@"%d",[self.companyArray count]);
@@ -107,8 +107,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-  //  NSLog(@"trying to populate table");
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellReuseIdentifier];
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellReuseIdentifier];
     
     if (!cell){
         cell = [[UITableViewCell alloc ]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableViewCellReuseIdentifier];
@@ -124,8 +123,7 @@
         label.tag = companyNameLabelTag;
         label.font = [UIFont boldSystemFontOfSize:17];
         label.frame = CGRectMake(5, 0, self.CompanyDetailsTable.frame.size.width - 5, 25);
-        //label.backgroundColor = [UIColor greenColor];
-        [cell.contentView addSubview:label];
+         [cell.contentView addSubview:label];
     }
     label.text = currentCompany.name;
     
@@ -136,8 +134,7 @@
         label.tag = companySymbolLabelTag;
         label.font = [UIFont systemFontOfSize:12];
         label.frame = CGRectMake(5, 25, self.CompanyDetailsTable.frame.size.width - 5, 15);
-        //label.backgroundColor = [UIColor blueColor];
-        [cell.contentView addSubview:label];
+         [cell.contentView addSubview:label];
     }
     label.text = [NSString stringWithFormat:@"SYMBOL: %@", currentCompany.symbol];
    
@@ -148,16 +145,9 @@
         label.tag = companyExchangeLabelTag;
         label.font = [UIFont systemFontOfSize:12];
         label.frame = CGRectMake(5, 43, self.CompanyDetailsTable.frame.size.width - 5, 15);
-        //label.backgroundColor = [UIColor blueColor];
-        [cell.contentView addSubview:label];
+         [cell.contentView addSubview:label];
     }
     label.text = [NSString stringWithFormat:@"EXCHANGE: %@", currentCompany.exchange];
-    
-
-    
-    
-    
-    
     
     return cell;
 
@@ -171,7 +161,7 @@
     
     return 65;
 }
-//
+ 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
