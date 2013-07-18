@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = NO;
     [self reloadData];
-
+    self.view.backgroundColor = [UIColor blackColor];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -80,7 +80,7 @@
         graph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
         CPTTheme *theme = [CPTTheme themeNamed:kCPTDarkGradientTheme];
         [graph applyTheme:theme];
-        graph.paddingTop    = 0.0;
+        graph.paddingTop    = 22.0;
         graph.paddingBottom = 0.0;
         graph.paddingLeft   = 0.0;
         graph.paddingRight  = 0.0;
@@ -142,10 +142,29 @@
         plotSymbol.size          = CGSizeMake(3.0, 3.0);
         boundLinePlot.plotSymbol = plotSymbol;
 
-             
+        
+        [(CPTXYPlotSpace *)graph.defaultPlotSpace scaleToFitPlots:[NSArray arrayWithObjects:dataSourceLinePlot, boundLinePlot, nil]];
+
+        
     }
     
     self.graphHost.hostedGraph = graph;
+    
+    if ([self.timeSeries.seriesLabels count] >0) {
+        NSString *title = [NSString stringWithFormat:@"High Prices: %@ to %@",[self.timeSeries.seriesLabels objectAtIndex:0],[self.timeSeries.seriesLabels objectAtIndex:[self.timeSeries.seriesLabels count]-1] ];
+        graph.title = title;
+        
+        // 3 - Create and set text style
+        CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
+        titleStyle.color = [CPTColor whiteColor];
+        titleStyle.fontName = @"Helvetica-Bold";
+        titleStyle.fontSize = 16.0f;
+        graph.titleTextStyle = titleStyle;
+        graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
+        graph.titleDisplacement = CGPointMake(0.0f, 18.0f);
+        
+    }
+   
     
     NSDecimalNumber *high   = [NSDecimalNumber zero];
     NSDecimalNumber *low    =[NSDecimalNumber zero];
@@ -159,26 +178,84 @@
         
 
     }
-   //[NSDecimalNumber decimalNumberWithDecimal:[self.timeSeries.high.max decimalValue]];
-     //  NSLog(@"high = %@, low = %@, length = %@", high, low, length);
+      //  NSLog(@"high = %@, low = %@, length = %@", high, low, length);
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0.0) length:CPTDecimalFromUnsignedInteger([self.timeSeries.high.values count])];
+   
+    CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.3f)];
+    plotSpace.xRange = xRange;
+    
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:[low decimalValue] length:[length decimalValue]];
+    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.3f)];
+    plotSpace.yRange = yRange;
     // Axes
     
     plotSpace.allowsUserInteraction = YES;
-    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     
+
+    
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
+ 
     CPTXYAxis *x = axisSet.xAxis;
-    x.majorIntervalLength         = CPTDecimalFromDouble(50.0);
-    x.orthogonalCoordinateDecimal = [low decimalValue] ;//CPTDecimalFromInteger(0);
+    x.majorIntervalLength         = CPTDecimalFromDouble(200.0);
+    NSNumber *n = [ NSNumber numberWithFloat:[[NSString stringWithFormat:@"%f", round(2.0f * [low floatValue]) / 2.0f] floatValue ] ];
+    
+    float roundedValue = round(2.0f * [low floatValue]) / 2.0f;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setMaximumFractionDigits:3];
+    [formatter setRoundingMode: NSNumberFormatterRoundDown];
+    
+    NSString *numberString = [formatter stringFromNumber:[NSNumber numberWithFloat:roundedValue]];
+    n = [ NSNumber numberWithFloat:[numberString floatValue]];
+    
+    x.orthogonalCoordinateDecimal = [n  decimalValue] ;//CPTDecimalFromInteger(0);
+    
+    CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
+    axisTitleStyle.color = [CPTColor whiteColor];
+    axisTitleStyle.fontName = @"Helvetica-Bold";
+    axisTitleStyle.fontSize = 12.0f;
+
+    CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
+    axisLineStyle.lineWidth = 2.0f;
+    axisLineStyle.lineColor = [CPTColor whiteColor];
+    
     x.minorTicksPerInterval       = 0;
-    x.title = @"Time";
-    x.titleOffset = 0;
-    x.titleLocation = CPTDecimalFromString(@"1.25");
+   // x.title = @"Time";
+    x.titleOffset = 10.0f;
+    x.titleLocation = CPTDecimalFromString(@"-2.0");
     CPTMutableTextStyle *style = [CPTMutableTextStyle textStyle];
     style.color = [CPTColor whiteColor];
     x.titleTextStyle =      style;
-    
+    x.labelTextStyle = axisTitleStyle;
+    x.labelingPolicy = CPTAxisLabelingPolicyNone;
+    x.labelTextStyle = style;
+    x.majorTickLineStyle = axisLineStyle;
+    x.minorTickLineStyle = axisLineStyle;
+
+    CGFloat dateCount = [self.timeSeries.seriesLabels count];
+    NSMutableSet *xLabels = [NSMutableSet setWithCapacity:dateCount];
+    NSMutableSet *xLocations = [NSMutableSet setWithCapacity:dateCount];
+    NSInteger i = 0;
+    for (NSString *date in self.timeSeries.seriesLabels) {
+        if (i %4 ==0) {
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:date  textStyle:x.labelTextStyle];
+            NSLog(@"%@",[NSNumber numberWithFloat:(float)[self.timeSeries.high.values count] * [[self.timeSeries.seriesLabelCoordinates objectAtIndex:i] floatValue]]);
+            label.tickLocation =  [[NSNumber numberWithFloat:(float)[self.timeSeries.high.values count] * [[self.timeSeries.seriesLabelCoordinates objectAtIndex:i] floatValue]] decimalValue];
+             
+            label.offset = x.majorTickLength;
+            if (label) {
+                [xLabels addObject:label];
+                [xLocations addObject:[NSNumber numberWithFloat:(float)[self.timeSeries.high.values count] * [[self.timeSeries.seriesLabelCoordinates objectAtIndex:i] floatValue]]];
+            }
+            
+        }
+        ++i;
+    }
+    x.axisLabels = xLabels;
+    x.majorTickLocations = xLocations;
+
+      
     CPTXYAxis *y  = axisSet.yAxis;
     NSDecimal six = CPTDecimalFromInteger(6);
     y.majorIntervalLength         = CPTDecimalDivide([length decimalValue], six);
@@ -187,12 +264,18 @@
     y.minorTickLineStyle          = nil;
     y.orthogonalCoordinateDecimal = CPTDecimalFromInteger(0);
     y.alternatingBandFills        = [NSArray arrayWithObjects:[[CPTColor whiteColor] colorWithAlphaComponent:0.1], [NSNull null], nil];
-    x.tickDirection = CPTSignPositive;
+   // axisSet.yAxis.labelingPolicy = CPTAxisLabelingPolicyNone;
+    y.labelOffset = -40.0f;
+    
+    y.labelTextStyle = axisTitleStyle;
+    x.tickDirection = CPTSignNegative;
+    y.majorTickLineStyle = axisLineStyle;
+
     y.tickDirection = CPTSignPositive;
     [graph reloadData];
     
     
-    graph.legend                 = [CPTLegend legendWithGraph:graph];
+   /* graph.legend                 = [CPTLegend legendWithGraph:graph];
     graph.legend.textStyle       = x.titleTextStyle;
     graph.legend.fill            = [CPTFill fillWithColor:[CPTColor darkGrayColor]];
     graph.legend.borderLineStyle = x.axisLineStyle;
@@ -200,17 +283,15 @@
     graph.legend.swatchSize      = CGSizeMake(25.0, 25.0);
     graph.legendAnchor           = CPTRectAnchorBottom;
     graph.legendDisplacement     = CGPointMake(0.0, 12.0);
-
+*/
     
-   // [[self navigationItem] setTitle:[dataPuller symbol]];
-}
+ }
 #pragma mark -
 #pragma mark Plot Data Source Methods
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-  //  NSLog(@"returned number is %d", [self.timeSeries.high.values count]);
-    return [self.timeSeries.high.values count];
+     return [self.timeSeries.high.values count];
 }
 
 
@@ -245,12 +326,9 @@
             num = [NSDecimalNumber  decimalNumberWithDecimal:[[financialData objectAtIndex:index ] decimalValue] ];
             NSAssert([num isMemberOfClass:[NSDecimalNumber class]], @"grrr");
         }
-        
-
     
     }
-     //   NSLog(@"returned number is %@", num);
-    return num;
+     return num;
 
 }
 
