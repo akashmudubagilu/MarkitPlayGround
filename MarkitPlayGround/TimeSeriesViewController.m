@@ -47,7 +47,7 @@
     
     [request makeTimeSeriesRequestSuccess:^(TimeSeries *timeSeries) {
         
-       NSLog(@"got time series");
+     //  NSLog(@"got time series");
         dispatch_async(dispatch_get_main_queue(), ^{
            // [self createPlot];
             self.timeSeries  = timeSeries;
@@ -240,7 +240,7 @@
     for (NSString *date in self.timeSeries.seriesLabels) {
         if (i %4 ==0) {
             CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:date  textStyle:x.labelTextStyle];
-            NSLog(@"%@",[NSNumber numberWithFloat:(float)[self.timeSeries.high.values count] * [[self.timeSeries.seriesLabelCoordinates objectAtIndex:i] floatValue]]);
+          //  NSLog(@"%@",[NSNumber numberWithFloat:(float)[self.timeSeries.high.values count] * [[self.timeSeries.seriesLabelCoordinates objectAtIndex:i] floatValue]]);
             label.tickLocation =  [[NSNumber numberWithFloat:(float)[self.timeSeries.high.values count] * [[self.timeSeries.seriesLabelCoordinates objectAtIndex:i] floatValue]] decimalValue];
              
             label.offset = x.majorTickLength;
